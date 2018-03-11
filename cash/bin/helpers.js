@@ -1,4 +1,5 @@
 /*eslint-disable no-process-exit*/
+/**get all the libraries necessary to launch the converter*/
 const chalk = require('chalk');
 const updateNotifier = require('update-notifier');
 const Conf = require('conf');
@@ -8,6 +9,8 @@ const config = new Conf();
 
 updateNotifier({pkg}).notify();
 
+
+/**this function let you save a default currency, if you dont use specify the currency it will be automatically the default currency when you do the conversion*/
 const saveCurrencies = argv => {
   config.set('defaultFrom', argv[1] || config.get('defaultFrom', 'USD'));
   config.set(
@@ -20,11 +23,13 @@ const saveCurrencies = argv => {
   process.exit(1);
 };
 
+/**function that shows the version of the program*/
 const version = () => {
   console.log(pkg.version);
   process.exit(1);
 };
 
+/**function that shows the help for users*/
 const help = () => {
   console.log(`
 Usage:
@@ -57,6 +62,7 @@ Examples:
   process.exit(1);
 };
 
+/**call the different fonctions if you put arguments "-v" "-h" or "save" after your request*/
 const helpers = argv => {
   // Version
   if (argv.indexOf('--version') !== - 1 || argv.indexOf('-v') !== - 1) {

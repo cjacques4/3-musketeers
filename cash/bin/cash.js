@@ -1,12 +1,16 @@
 /*eslint-disable no-process-exit*/
+
+//get all the libraries necessary to launch the converter
 const got = require('got');
 const money = require('money');
 const chalk = require('chalk');
 const ora = require('ora');
 const currencies = require('../lib/currencies.json');
 
+/**get the rates in order to convert*/
 const API = 'https://api.fixer.io/latest';
 
+/** function that will convert a currency amount into an other one*/
 const convert = configuration => {
   const {amount, to, from, response, loading} = configuration;
 
@@ -33,6 +37,9 @@ const convert = configuration => {
   );
   process.exit(1);
 };
+
+/**function that initialize the amount of money we want to convert, the currency we want to convert and the currency obtained after the conversion.
+This function also loads the currencies, and the rates from the API (https://api.fixer.io/latest)*/
 
 const cash = async command => {
   const amount = command.amount;
